@@ -1,51 +1,34 @@
-# Copyright (c) Streamlit Inc. (2018-2022) Snowflake Inc. (2022)
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import streamlit as st
-from streamlit.logger import get_logger
+import pandas as pd
+import numpy as np
 
-LOGGER = get_logger(__name__)
+st.title('Peace Keeper')
 
+# Spécifiez le chemin vers votre fichier CSV
+chemin_fichier = r'C:\Users\cfran\OneDrive\Documents\MBA IA\Python\Airline Dataset Updated - v2.csv'
 
-def run():
-    st.set_page_config(
-        page_title="Hello",
-        page_icon="👋",
-    )
+# Chargez les données dans un DataFrame pandas
+donnees = pd.read_csv(chemin_fichier)
 
-    st.write("# Welcome to Streamlit! 👋")
+# Affichez les premières lignes pour vérifier
+print(donnees.head())
 
-    st.sidebar.success("Select a demo above.")
+   
+# Fonction pour la page d'accueil
+def page_accueil():
+    st.title("Page d'accueil")
+    st.write("Bienvenue sur la page d'accueil.")
 
-    st.markdown(
-        """
-        Streamlit is an open-source app framework built specifically for
-        Machine Learning and Data Science projects.
-        **👈 Select a demo from the sidebar** to see some examples
-        of what Streamlit can do!
-        ### Want to learn more?
-        - Check out [streamlit.io](https://streamlit.io)
-        - Jump into our [documentation](https://docs.streamlit.io)
-        - Ask a question in our [community
-          forums](https://discuss.streamlit.io)
-        ### See more complex demos
-        - Use a neural net to [analyze the Udacity Self-driving Car Image
-          Dataset](https://github.com/streamlit/demo-self-driving)
-        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
-    """
-    )
+# Fonction pour la page de contact
+def page_contact():
+    st.title("Informations par pays")
+    st.write("Bienvenue sur Informations par pays.")
 
+# Ajout des options dans la sidebar pour la navigation
+page = st.sidebar.selectbox("Choisir une page :", ["Accueil", "Informations par pays"])
 
-if __name__ == "__main__":
-    run()
+# Logique de navigation
+if page == "Accueil":
+    page_accueil()
+elif page == "Informations par pays":
+    page_contact()
